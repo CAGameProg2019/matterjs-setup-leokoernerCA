@@ -20,13 +20,8 @@ Engine.run(engine);
 Render.run(render);
 
 let groundstick=Bodies.rectangle(10, 600, 2000, 10,{isStatic: true});
-<<<<<<< HEAD
 let wreckBall=Bodies.circle(300, 500, 80, {density: 100, frictionAir: 0.0});
 let roof = Bodies.polygon(500, 300, 3, 130, {density: .1});
-=======
-let wreckBall=Bodies.circle(300, 500, 80, {density: 1000000000000, frictionAir: 0.0});
-let roof = Bodies.polygon(500, 300, 3, 130);
->>>>>>> origin/master
 let stack = Composites.stack(400, 400, 5, 5, 0, 0, function(x, y) {
         return Bodies.rectangle(x, y, 40, 40, {density: 1});
     });
