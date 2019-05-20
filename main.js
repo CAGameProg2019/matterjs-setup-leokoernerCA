@@ -7,17 +7,28 @@ let Engine = Matter.Engine,
 let engine = Engine.create();
 let render = Render.create({
     element: document.body,
-    engine: engine
+    engine: engine,
+    options: {
+        wireframes: false
+    }
+
 });
+
+
 Engine.run(engine);
 Render.run(render);
- 
-let ball=Bodies.circle(200, 10, 40);
-let floor=Bodies.trapezoid(340,300,500,100,.9,{isStatic: true});
-let myCar=Composites.car(390, 0, 100, 30, 40);
-let myCradle=Composites.newtonsCradle(600, 100, 5, 10, 160);
-World.add(engine.world, [ball,floor,myCar,myCradle]);
- 
+
+let groundstick=Bodies.rectangle(10, 600, 2000, 10,{isStatic: true})
+let wreckBall=Bodies.circle(300, 300, 80)
+let constraint = Constraint.create({
+       pointA: { x: 150, y: 100},
+       bodyB: wreckBall
+   });
+let stack = Composites.stack(400, 30, 5, 5, 0, 0, function(x, y) {
+        return Bodies.rectangle(x, y, 40, 40);
+    });
+World.add(engine.world, [constraint, stack, wreckBall, groundstick]);
+
 let world = engine.world;
 let Mouse= Matter.Mouse;
 let MouseConstraint=Matter.MouseConstraint;
