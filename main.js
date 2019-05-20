@@ -3,6 +3,7 @@ let Engine = Matter.Engine,
     Render = Matter.Render,
     World = Matter.World,
     Bodies = Matter.Bodies,
+    Constraint = Matter.Constraint,
     Composites = Matter.Composites;
 let engine = Engine.create();
 let render = Render.create({
@@ -19,9 +20,9 @@ Engine.run(engine);
 Render.run(render);
 
 let groundstick=Bodies.rectangle(10, 600, 2000, 10,{isStatic: true})
-let wreckBall=Bodies.circle(300, 300, 80)
+let wreckBall=Bodies.circle(400, 400, 80)
 let constraint = Constraint.create({
-       pointA: { x: 150, y: 100},
+       pointA: { x: 200, y: 100},
        bodyB: wreckBall
    });
 let stack = Composites.stack(400, 30, 5, 5, 0, 0, function(x, y) {
