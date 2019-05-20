@@ -19,16 +19,23 @@ let render = Render.create({
 Engine.run(engine);
 Render.run(render);
 
-let groundstick=Bodies.rectangle(10, 600, 2000, 10,{isStatic: true})
-let wreckBall=Bodies.circle(400, 400, 80)
+let groundstick=Bodies.rectangle(10, 600, 2000, 10,{isStatic: true});
+let wreckBall=Bodies.circle(300, 500, 80, {density: 1000000000000, frictionAir: 0.0});
+let roof = Bodies.polygon(500, 300, 3, 130);
+let stack = Composites.stack(400, 400, 5, 5, 0, 0, function(x, y) {
+        return Bodies.rectangle(x, y, 40, 40, {density: 1});
+    });
 let constraint = Constraint.create({
-       pointA: { x: 200, y: 100},
+       pointA: { x: 300, y: 100},
        bodyB: wreckBall
    });
-let stack = Composites.stack(400, 30, 5, 5, 0, 0, function(x, y) {
-        return Bodies.rectangle(x, y, 40, 40);
-    });
-World.add(engine.world, [constraint, stack, wreckBall, groundstick]);
+// let stackContraint = Constraint.create({
+//       pointA: { x: 400, y: 500},
+//       bodyB: stack
+//   });
+Matter.Body.rotate(roof, -(3.14/6))
+World.add(engine.world, [roof, constraint, stack, wreckBall, groundstick]);
+
 
 let world = engine.world;
 let Mouse= Matter.Mouse;
